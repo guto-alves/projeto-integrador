@@ -1,3 +1,15 @@
+# Projeto Integrador / Integrative Project
+Projeto integrador desenvolvido nas matérias de Programação Web e Programação de Aplicativos Mobile.
+Integrating project developed in the areas of Web Programming and Mobile Application Programming.
+
+## Integrantes / Members
+- [Alan Ramos](https://github.com/deepzS2)
+- [Gustavo Alves](https://github.com/guto-alves)
+- Renan Bomfim
+
+
+### Laravel 
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
