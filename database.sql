@@ -1,4 +1,0 @@
-CREATE TABLE Test(
-  id INTEGER PRIMARY KEY,
-  col1 VARCHAR(50)
-)
