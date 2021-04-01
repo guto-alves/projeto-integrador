@@ -13,7 +13,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        return view('course.my-courses', [
+            'courses' => auth()->user()->courses
+        ]);
     }
 
     /**
@@ -43,7 +45,7 @@ class CourseController extends Controller
 
         session()->flash('successMessage', 'Course ' . $validatedData['name'] . ' was created');
 
-        return redirect()->route('course.create');
+        return redirect()->route('course.index');
     }
 
     /**
