@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LessonPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +20,10 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('course', CourseController::class);
+    Route::resources([
+        'course' => CourseController::class
+    ]);
+
+    Route::get('course/{course}/lesson', [LessonPlanController::class, 'create'])->name('lessons.create');
+    Route::post('course/{course}/lesson', [LessonPlanController::class, 'store'])->name('lessons.store');
 });
