@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    @yield('style')
+    @yield('custom-head')
 </head>
 <body>
 <div id="app">
@@ -80,11 +80,9 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="pb-4">
         @yield('content')
     </main>
 </div>
-
-@yield('script')
 </body>
 </html>
