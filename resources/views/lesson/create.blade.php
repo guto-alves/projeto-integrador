@@ -21,6 +21,15 @@
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('course.index') }}">Meus Cursos</a></li>
+                        <li class="breadcrumb-item"><a
+                                href="{{ route('course.show', [$course->id]) }}">{{ $course->name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Novo Plano de Aula</li>
+                    </ol>
+                </nav>
+
                 <div class="card">
                     <div
                         class="card-header text-center font-weight-bold">{{ $course->name . ' - Plano de Aula' }}</div>
@@ -47,17 +56,19 @@
                             <div class="mb-3">
                                 <label for="description" class="form-text">Descrição</label>
                                 <textarea name="description" id="description" class="form-control" rows="2"
-                                          placeholder="Curta descrição"
+                                          placeholder="Curta descrição..."
                                           maxlength="500"></textarea>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="description" class="form-text">Conteúdo</label>
                                 <div id="content-editor" style="height: 350px;"></div>
                                 <input type="hidden" id="content" name="content">
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-block">Criar</button>
+                            <div class="row justify-content-center mx-3">
+                                <button type="submit" class="btn btn-primary col-md-6">Criar</button>
+                            </div>
                         </form>
                     </div>
                 </div>

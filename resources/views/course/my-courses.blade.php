@@ -22,7 +22,8 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="page-title">Meus Cursos</h3>
-            <a class="btn btn-primary" role="button" href="{{ route('course.create') }}">Criar novo curso</a>
+            <a class="btn btn-primary font-weight-bold" role="button" href="{{ route('course.create') }}">Criar novo
+                Curso</a>
         </div>
 
         <div class="row row-cols-1 row-cols-md-2">
