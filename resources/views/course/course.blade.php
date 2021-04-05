@@ -6,8 +6,10 @@
             <h3 class="text-center">{{$course->name}}</h3>
             <p>{{$course->description}}</p>
 
-            <a class="btn btn-light text-right" href="{{ route('lessons.create', [$course->id]) }}">
-                Criar Plano de Aula</a>
+            <a class="btn btn-light text-right text-center"
+               href="{{ route('lessons.create', [$course->id]) }}">
+                Criar Plano de Aula
+            </a>
         </div>
     </div>
 
