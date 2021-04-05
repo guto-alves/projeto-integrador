@@ -4,9 +4,8 @@ Projeto integrador desenvolvido nas matérias de Programação Web e Programaç�
 Integrating project developed in the areas of Web Programming and Mobile Application Programming.
 
 ## Integrantes / Members
-- [Alan Ramos](https://github.com/deepzS2)
 - [Gustavo Alves](https://github.com/guto-alves)
-- Renan Bomfim
+- [Renan Bomfim](https://github.com/renan-66)
 
 
 ### Laravel 
