@@ -4,18 +4,27 @@
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="text-right">{{ count($lessons) }} aulas</div>
+                <hr>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                <div class="list-group mt-4">
+                    @forelse($lessons as $lesson)
+                        <a href="{{ route('lessons.show', $lesson->id) }}"
+                           class="list-group-item list-group-item-action mb-3 border">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="font-weight-bold mb-1">{{ $lesson->name }}</h5>
+                                <small>3 days ago</small>
                             </div>
-                        @endif
-
-                        {{ __('You are logged in!') }}
-                    </div>
+                            <p class="mb-1">{{ $lesson->description }}</p>
+                            <small class="badge badge-primary">{{ $lesson->course->name }}</small>
+                        </a>
+                    @empty
+                        <span>
+                    Este Curso não tem nenhum Plano de Aula ainda.
+                    <a class="text-decoration-none ml-1"
+                       href="{{ route('lessons.create', [$course->id]) }}">Crie um agora mesmo!</a>
+                </span>
+                    @endforelse
                 </div>
             </div>
         </div>
