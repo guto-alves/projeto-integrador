@@ -75,7 +75,9 @@ class LessonPlanController extends Controller
      */
     public function edit(LessonPlan $lessonPlan)
     {
-        //
+        return view('lesson.edit', [
+            'lesson' => $lessonPlan
+        ]);
     }
 
     /**
@@ -87,7 +89,18 @@ class LessonPlanController extends Controller
      */
     public function update(Request $request, LessonPlan $lessonPlan)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'content' => ['required']
+        ]);
+
+        $lessonPlan->name = $validatedData['name'];
+        $lessonPlan->description = $validatedData['description'];
+        $lessonPlan->content = $validatedData['content'];
+        $lessonPlan->save();
+
+        return redirect()->route('lessons.show', $lessonPlan->id);
     }
 
     /**

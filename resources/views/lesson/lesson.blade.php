@@ -32,6 +32,10 @@
 
             <h3 class="text-center">{{ $lesson->name }}</h3>
             <p>{{ $lesson->description }}</p>
+
+            <div class="text-right"><a class="btn btn-sm btn-light"
+                                       href="{{ route('lessons.edit', $lesson->id) }}">Editar Aula</a>
+            </div>
         </div>
     </div>
 

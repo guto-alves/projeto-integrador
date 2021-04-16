@@ -27,4 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::get('course/{course}/lesson', [LessonPlanController::class, 'create'])->name('lessons.create');
     Route::post('course/{course}/lesson', [LessonPlanController::class, 'store'])->name('lessons.store');
     Route::get('lesson/{lessonPlan}', [LessonPlanController::class, 'show'])->name('lessons.show');
+    Route::get('lesson/{lessonPlan}/edit', [LessonPlanController::class, 'edit'])->name('lessons.edit');
+    Route::put('lesson/{lessonPlan}', [LessonPlanController::class, 'update'])->name('lessons.update');
 });
