@@ -32,7 +32,8 @@
 
         <div class="list-group mt-4">
             @forelse($course->lessons as $lesson)
-                <a href="#" class="list-group-item list-group-item-action mb-3 border">
+                <a href="{{ route('lessons.show', $lesson->id) }}"
+                   class="list-group-item list-group-item-action mb-3 border">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="font-weight-bold mb-1">{{ $lesson->name }}</h5>
                         <small>3 days ago</small>

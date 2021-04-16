@@ -26,4 +26,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('course/{course}/lesson', [LessonPlanController::class, 'create'])->name('lessons.create');
     Route::post('course/{course}/lesson', [LessonPlanController::class, 'store'])->name('lessons.store');
+    Route::get('lesson/{lessonPlan}', [LessonPlanController::class, 'show'])->name('lessons.show');
 });

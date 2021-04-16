@@ -56,12 +56,15 @@ class LessonPlanController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Course $course
      * @param \App\Models\LessonPlan $lessonPlan
      * @return \Illuminate\Http\Response
      */
     public function show(LessonPlan $lessonPlan)
     {
-        //
+        return view('lesson.lesson', [
+            'lesson' => $lessonPlan
+        ]);
     }
 
     /**
