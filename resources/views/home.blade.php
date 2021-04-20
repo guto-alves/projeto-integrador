@@ -4,8 +4,11 @@
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="text-right">{{ count($lessons) }} aulas</div>
+                <label for="input-filter">Filtrar</label>
+                <input type="text" id="input-filter" class="form-control" placeholder="Pesquise por qualquer coisa ...">
+
                 <hr>
+                <div class="text-right">{{ count($lessons) }} aulas</div>
 
                 <div class="list-group mt-4">
                     @forelse($lessons as $lesson)
@@ -29,4 +32,21 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $('#input-filter').keyup(function () {
+            let filterText = $(this).val();
+
+            $('.list-group-item').each(function () {
+                let lessonCardContainer = $(this);
+                let lessonCardText = lessonCardContainer.text();
+
+                if (lessonCardText.toUpperCase().indexOf(filterText.toUpperCase()) > -1) {
+                    lessonCardContainer.show();
+                } else {
+                    lessonCardContainer.hide();
+                }
+            });
+        });
+    </script>
 @endsection
