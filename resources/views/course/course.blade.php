@@ -8,7 +8,7 @@
 
             <a class="btn btn-light text-right text-center"
                href="{{ route('lessons.create', [$course->id]) }}">
-                Criar Plano de Aula
+                Adicionar Aula
             </a>
         </div>
     </div>
@@ -39,11 +39,10 @@
                         <small>3 days ago</small>
                     </div>
                     <p class="mb-1">{{ $lesson->description }}</p>
-                    <small>And some small print.</small>
                 </a>
             @empty
                 <span>
-                    Este Curso não tem nenhum Plano de Aula ainda.
+                    Este Curso não tem nenhuma Aula ainda.
                     <a class="text-decoration-none ml-1"
                        href="{{ route('lessons.create', [$course->id]) }}">Crie um agora mesmo!</a>
                 </span>

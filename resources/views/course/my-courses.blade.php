@@ -31,7 +31,7 @@
                 <div class="col mb-4">
                     <div class="card" onclick="showCourse({{ $course->id }})">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $course->name }}</h5>
+                            <h5 class="card-title font-weight-bold">{{ $course->name }}</h5>
                             <p class="card-text">{{ $course->description }}</p>
                         </div>
                     </div>

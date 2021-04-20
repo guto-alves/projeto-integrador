@@ -8,7 +8,7 @@
                 <input type="text" id="input-filter" class="form-control" placeholder="Pesquise por qualquer coisa ...">
 
                 <hr>
-                <div class="text-right">{{ count($lessons) }} aulas</div>
+                <div id="totalLessons" class="text-right">{{ count($lessons) }} aulas</div>
 
                 <div class="list-group mt-4">
                     @forelse($lessons as $lesson)
@@ -37,16 +37,25 @@
         $('#input-filter').keyup(function () {
             let filterText = $(this).val();
 
+            let totalLessons = 0;
+
             $('.list-group-item').each(function () {
                 let lessonCardContainer = $(this);
                 let lessonCardText = lessonCardContainer.text();
 
                 if (lessonCardText.toUpperCase().indexOf(filterText.toUpperCase()) > -1) {
                     lessonCardContainer.show();
+                    totalLessons++;
                 } else {
                     lessonCardContainer.hide();
                 }
             });
+
+            if (totalLessons > 0) {
+                $('#totalLessons').text(`${totalLessons} aulas`);
+            } else {
+                $('#totalLessons').text('Nenhuma aula encontrada');
+            }
         });
     </script>
 @endsection
