@@ -19,4 +19,9 @@ class LessonPlan extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'lesson_id');
+    }
 }

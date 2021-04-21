@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Course;
 use App\Models\LessonPlan;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class LessonPlanController extends Controller
 
         $course->lessons()->create($validatedData);
 
-        session()->flash('successMessage', 'Plano ' . $validatedData['name'] . ' foi criado com sucesso!');
+        session()->flash('successMessage', 'Aula ' . $validatedData['name'] . ' foi criada com sucesso!');
 
         return redirect()->route('course.show', ['course' => $course]);
     }

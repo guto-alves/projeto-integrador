@@ -35,7 +35,7 @@
 
                 <div class="card">
                     <div
-                        class="card-header text-center font-weight-bold">{{ $lesson->course->name . ' - Aula' }}</div>
+                        class="card-header text-center font-weight-bold">{{'Atualizar - ' . $lesson->name }}</div>
                     <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger" role="alert">

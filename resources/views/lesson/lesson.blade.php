@@ -40,8 +40,18 @@
     </div>
 
     <div class="container">
-        <h3>Conteúdo</h3>
+        <h3 class="font-weight-bold">Conteúdo</h3>
         <div id="content-editor"></div>
+
+        <h4 class="font-weight-bold mt-3">Comentários ({{ count($lesson->comments) }})</h4>
+        <hr>
+
+        <h4 class="font-weight-bold mt-4">Deixe seu comentário</h4>
+        <div id="comment-editor"></div>
+        <div class="text-center">
+            <button type="button" id="create-comment-button" class="btn btn-primary mt-3">Comentar
+            </button>
+        </div>
     </div>
 
     <script>
@@ -51,7 +61,7 @@
         });
         hljs.highlightAll();
 
-        let editor = new Quill('#content-editor', {
+        let contentEditor = new Quill('#content-editor', {
             modules: {
                 syntax: true,
                 toolbar: false
@@ -59,7 +69,46 @@
             readOnly: true,
             theme: 'snow'
         });
-        editor.clipboard.dangerouslyPasteHTML(@json($lesson->content));
+        contentEditor.clipboard.dangerouslyPasteHTML(@json($lesson->content));
+
+        let commentEditor = new Quill('#comment-editor', {
+            modules: {
+                syntax: true,
+                toolbar: [
+                    [{'font': []}],
+                    [{'size': ['small', false, 'large', 'huge']}], // custom dropdown
+                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                    [{'header': 1}, {'header': 2}], // custom button values
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                    [{'color': []}, {'background': []}], // dropdown with defaults from theme
+                    [{'align': ''}, {'align': 'center'}, {'align': 'right'}, {'align': 'justify'}],
+                    [{'script': 'sub'}, {'script': 'super'}], // superscript/subscript
+                    [{'list': 'ordered'}, {'list': 'bullet'}],
+                    [{'indent': '-1'}, {'indent': '+1'}], // outdent/indent
+                    [{'direction': 'rtl'}], // text direction
+                    ['blockquote', 'code-block'],
+                    ['link', 'image', 'video', 'formula'],
+                    ['clean'] // remove formatting button
+                ]
+            },
+            theme: 'snow'
+        });
+
+        $('#create-comment-button').click(function () {
+            let commentBody = commentEditor.root.innerHTML;
+
+            // let lessonId = @json($lesson->id);
+
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('comments.store', $lesson->id) }}",
+                data: {body: commentBody, _token: '{{csrf_token()}}'}
+            }).done(function (data) {
+                console.log('success!', data);
+            }).fail(function (jqXHR, textStatus) {
+                console.log(textStatus);
+            });
+        });
     </script>
 @endsection
 

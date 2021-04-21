@@ -44,7 +44,7 @@
                 <span>
                     Este Curso não tem nenhuma Aula ainda.
                     <a class="text-decoration-none ml-1"
-                       href="{{ route('lessons.create', [$course->id]) }}">Crie um agora mesmo!</a>
+                       href="{{ route('lessons.create', [$course->id]) }}">Crie uma agora mesmo!</a>
                 </span>
             @endforelse
         </div>

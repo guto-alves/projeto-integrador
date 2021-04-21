@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonPlanController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::get('lesson/{lessonPlan}', [LessonPlanController::class, 'show'])->name('lessons.show');
     Route::get('lesson/{lessonPlan}/edit', [LessonPlanController::class, 'edit'])->name('lessons.edit');
     Route::put('lesson/{lessonPlan}', [LessonPlanController::class, 'update'])->name('lessons.update');
+
+    Route::post('lesson/{lessonPlan}/comment', [CommentController::class, 'store'])->name('comments.store');
 });
