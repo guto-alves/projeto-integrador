@@ -30,7 +30,7 @@
                 </ol>
             </nav>
 
-            <h3 class="text-center">{{ $lesson->name }}</h3>
+            <h3 class="text-center font-weight-bold">{{ $lesson->name }}</h3>
             <p>{{ $lesson->description }}</p>
 
             <div class="text-right"><a class="btn btn-sm btn-light"
@@ -39,17 +39,30 @@
         </div>
     </div>
 
-    <div class="container">
-        <h3 class="font-weight-bold">Conteúdo</h3>
+    <div class="container mt-4">
+        <h5 class="font-weight-bold">Conteúdo</h5>
         <div id="content-editor"></div>
 
-        <h4 class="font-weight-bold mt-3">Comentários ({{ count($lesson->comments) }})</h4>
-        <hr>
+        <h5 class="font-weight-bold mt-4">Comentários ({{ count($lesson->comments) }})</h5>
+        <ul id="comments" class="list-group">
+            @foreach($lesson->comments as $comment)
+                <li class="list-group-item border mb-2">
+                    <div class="d-flex justify-content-between align-items-baseline">
+                        <div class="d-flex align-items-baseline">
+                            <span class="text-muted mr-1">Autor</span>
+                            <h6>{{ $comment->author->name }}</h6>
+                        </div>
+                        <small>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i:s')}}</small>
+                    </div>
+                    <div class="comment-body-editor">{{ $comment->body }}</div>
+                </li>
+            @endforeach
+        </ul>
 
-        <h4 class="font-weight-bold mt-4">Deixe seu comentário</h4>
+        <h5 class="font-weight-bold mt-4">Deixe seu comentário</h5>
         <div id="comment-editor"></div>
-        <div class="text-center">
-            <button type="button" id="create-comment-button" class="btn btn-primary mt-3">Comentar
+        <div class="row justify-content-center mt-2">
+            <button type="button" id="create-comment-button" class="btn btn-primary col-md-6">Comentar
             </button>
         </div>
     </div>
@@ -76,15 +89,12 @@
                 syntax: true,
                 toolbar: [
                     [{'font': []}],
-                    [{'size': ['small', false, 'large', 'huge']}], // custom dropdown
+                    [{'size': ['small', false, 'large']}], // custom dropdown
                     ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-                    [{'header': 1}, {'header': 2}], // custom button values
-                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                    [{'header': [2, 3, 4, false]}],
                     [{'color': []}, {'background': []}], // dropdown with defaults from theme
-                    [{'align': ''}, {'align': 'center'}, {'align': 'right'}, {'align': 'justify'}],
                     [{'script': 'sub'}, {'script': 'super'}], // superscript/subscript
                     [{'list': 'ordered'}, {'list': 'bullet'}],
-                    [{'indent': '-1'}, {'indent': '+1'}], // outdent/indent
                     [{'direction': 'rtl'}], // text direction
                     ['blockquote', 'code-block'],
                     ['link', 'image', 'video', 'formula'],
@@ -94,17 +104,31 @@
             theme: 'snow'
         });
 
+        let comments = @json($lesson->comments);
+        comments.forEach(function () {
+            $('#comments').append();
+        })
+
+        $('.comment-body-editor').each(function () {
+            new Quill($(this).get(0), {
+                modules: {
+                    syntax: true,
+                    toolbar: false
+                },
+                readOnly: true,
+                theme: 'snow'
+            }).clipboard.dangerouslyPasteHTML($(this).text());
+        })
+
         $('#create-comment-button').click(function () {
             let commentBody = commentEditor.root.innerHTML;
-
-            // let lessonId = @json($lesson->id);
 
             $.ajax({
                 method: 'POST',
                 url: "{{ route('comments.store', $lesson->id) }}",
                 data: {body: commentBody, _token: '{{csrf_token()}}'}
-            }).done(function (data) {
-                console.log('success!', data);
+            }).done(function () {
+                location.reload();
             }).fail(function (jqXHR, textStatus) {
                 console.log(textStatus);
             });
