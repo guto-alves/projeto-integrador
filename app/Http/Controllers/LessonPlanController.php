@@ -64,7 +64,8 @@ class LessonPlanController extends Controller
     public function show(LessonPlan $lessonPlan)
     {
         return view('lesson.lesson', [
-            'lesson' => $lessonPlan
+            'lesson' => $lessonPlan,
+            'editable' => $lessonPlan->course->user == auth()->user()
         ]);
     }
 

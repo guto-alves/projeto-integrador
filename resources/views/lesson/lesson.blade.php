@@ -33,26 +33,28 @@
             <h3 class="text-center font-weight-bold">{{ $lesson->name }}</h3>
             <p>{{ $lesson->description }}</p>
 
-            <div class="text-right"><a class="btn btn-sm btn-light"
-                                       href="{{ route('lessons.edit', $lesson->id) }}">Editar Aula</a>
-            </div>
+            @if($editable)
+                <div class="text-right"><a class="btn btn-sm btn-light"
+                                           href="{{ route('lessons.edit', $lesson->id) }}">Editar Aula</a>
+                </div>
+            @endif
         </div>
     </div>
 
     <div class="container mt-4">
         <h5 class="font-weight-bold">Conteúdo</h5>
-        <div id="content-editor"></div>
+        <div id="content-editor" class="shadow"></div>
 
-        <h5 class="font-weight-bold mt-4">Comentários ({{ count($lesson->comments) }})</h5>
+        <h5 class="font-weight-bold mt-5">Comentários ({{ count($lesson->comments) }})</h5>
         <ul id="comments" class="list-group">
             @foreach($lesson->comments as $comment)
-                <li class="list-group-item border mb-2">
+                <li class="list-group-item mb-2">
                     <div class="d-flex justify-content-between align-items-baseline">
                         <div class="d-flex align-items-baseline">
                             <span class="text-muted mr-1">Autor</span>
                             <h6>{{ $comment->author->name }}</h6>
                         </div>
-                        <small>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i:s')}}</small>
+                        <small>{{ \Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i:s') }}</small>
                     </div>
                     <div class="comment-body-editor">{{ $comment->body }}</div>
                 </li>
@@ -61,7 +63,7 @@
 
         <h5 class="font-weight-bold mt-4">Deixe seu comentário</h5>
         <div id="comment-editor"></div>
-        <div class="row justify-content-center mt-2">
+        <div class="row justify-content-center my-2">
             <button type="button" id="create-comment-button" class="btn btn-primary col-md-6">Comentar
             </button>
         </div>
@@ -70,7 +72,7 @@
     <script>
         hljs.configure({
             tabReplace: '    ',
-            languages: ['java']
+            languages: ['java', 'javascript', 'html']
         });
         hljs.highlightAll();
 
