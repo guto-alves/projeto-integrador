@@ -33,11 +33,11 @@
             <h3 class="text-center font-weight-bold">{{ $lesson->name }}</h3>
             <p>{{ $lesson->description }}</p>
 
-            @if($editable)
+            @can('update', $lesson)
                 <div class="text-right"><a class="btn btn-sm btn-light"
                                            href="{{ route('lessons.edit', $lesson->id) }}">Editar Aula</a>
                 </div>
-            @endif
+            @endcan
         </div>
     </div>
 

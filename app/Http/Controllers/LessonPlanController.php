@@ -64,8 +64,7 @@ class LessonPlanController extends Controller
     public function show(LessonPlan $lessonPlan)
     {
         return view('lesson.lesson', [
-            'lesson' => $lessonPlan,
-            'editable' => $lessonPlan->course->user == auth()->user()
+            'lesson' => $lessonPlan
         ]);
     }
 
@@ -77,6 +76,8 @@ class LessonPlanController extends Controller
      */
     public function edit(LessonPlan $lessonPlan)
     {
+        $this->authorize('update', $lessonPlan);
+
         return view('lesson.edit', [
             'lesson' => $lessonPlan
         ]);
@@ -91,6 +92,8 @@ class LessonPlanController extends Controller
      */
     public function update(Request $request, LessonPlan $lessonPlan)
     {
+        $this->authorize('update', $lessonPlan);
+
         $validatedData = $request->validate([
             'name' => ['required'],
             'description' => ['required'],
